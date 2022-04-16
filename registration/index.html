@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8">
+    <title> Responsive Registration Form  </title>
+    
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <style>
+         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+
+*,
+*:before,
+*:after{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: "Poppins",sans-serif;
+    font-weight: 500;
+}
+body{
+    height: 100vh;
+    background-color: #f1f8fc;
+}
+.container{
+    background-color: #ffffff;
+    width: 20%;
+    max-height:510px;
+    min-width: 382px;
+    padding: 35px 50px;
+    transform: translate(-50%,-50%);
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    border-radius: 20px;
+    box-shadow: 20px 30px 25px rgba(0,0,0,0.15);
+}
+h1{
+    font-size: 30px;
+    text-align: center;
+    color: #1c093c;
+    margin-top:-35px;
+}
+p{
+    position: relative;
+    margin: auto;
+    width: 100%;
+    text-align: center;
+    color: #606060;
+    font-size: 14px;
+    font-weight: 400;
+  margin-bottom: -25px;
+}
+form{
+    width: 100%;
+    position: relative;
+    margin: 30px auto 0 auto;
+}
+.row{
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px,1fr));
+    grid-gap: 20px 30px;
+    margin-bottom: 2px;
+}
+label{
+    color: #1c093c;
+    font-size: 14px;
+}
+textarea,
+input{
+    width: 100%;
+    font-weight: 400;
+    padding: 8px 10px;
+    border-radius: 5px;
+    border: 1.2px solid #c4cae0;
+    
+}
+textarea{
+    resize: none;
+}
+textarea:focus,
+input:focus{
+    outline: none;
+    border-color: #6f6df4;
+}
+
+.button input{
+    border: none;
+    color: #fff;
+    width: 120px;
+    font-size: 14px;
+    padding: 7px 5px;
+    margin: 0 65px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    border-radius: 6px;
+    background-color: #5bacdf;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+     </style>
+   </head>
+<body>
+  <div class="container">
+    <h1>Registration</h1>
+    <p>Register to start marking your attendance!</p>
+      <form action="/signup" method="POST">
+        {% csrf_token %}
+         <div class="row">
+                <div class="column">
+                    <label for="username">FullName</label>
+                    <input type="text" id="username" name="username"placeholder="Enter your name" required>
+                </div>
+                <div class="column">
+                    <label for="emailid">Email</label>
+                    <input type="email"id="emailid"name="emailid" placeholder="Enter your email" required>
+                </div>
+            </div>
+         <div class="row">
+                <div class="column">
+                    <label for="Dept">Department</label>
+                  <select id="dept" name="dept">
+                    {% for i in department.obj %}
+                    <option value="{{i}}">{{i}}</option>
+                    {% endfor %}
+                </select>
+          </div>
+          <div class="column">
+                    <label for="Section">Section</label>
+                 <select id="section" name="section">
+                    {% for i in section %}
+                    <option  value="{{i}}" >{{i}}</option>
+                    {% endfor %}
+                </select>
+              </div>
+          </div>
+          <div class="row">
+                <div class="column">
+                    <label for="subject">Password</label>
+                     <input type="password" id="pass1" name="pass1"placeholder="Enter your password" required>
+                </div>
+                <div class="column">
+                    <label for="subject">confirm password</label>
+                <input type="password"id='pass2'name="pass2" placeholder="Confirm your password" required>
+                </div>
+            </div>
+              <div class="button">
+          <input type="submit" value="Register">
+        </div>
+      </form>
+      <div>
+        {% for message in messages %}
+        <h3>{{message}}</h3>
+        {%endfor %}
+    </div> 
+</body>
+</html>
+
